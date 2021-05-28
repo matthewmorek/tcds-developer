@@ -2,7 +2,7 @@
   <Layout>
     <div>
       <api-header :api-meta="$page.root" :pages="$page.pages.edges" />
-      <swagger-ui :spec-path="`/references/${$page.root.reference}`" />
+      <swagger :spec-path="`/references/${$page.root.reference}`" />
     </div>
   </Layout>
 </template>
@@ -32,11 +32,11 @@
 
 <script>
 import ApiHeader from "@/components/ApiHeader";
-import SwaggerUi from "@/components/SwaggerUi";
+import Swagger from "@/components/Swagger";
 export default {
   components: {
     ApiHeader,
-    SwaggerUi,
+    Swagger,
   },
 };
 </script>

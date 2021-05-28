@@ -14,6 +14,7 @@ const {
 const isNetlifyProduction = NETLIFY_ENV === "production";
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 
+const webpack = require("webpack");
 const tailwind = require("tailwindcss");
 
 module.exports = {
@@ -98,6 +99,13 @@ module.exports = {
         plugins: [tailwind()],
       },
     },
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        SwaggerUI: "swagger-ui",
+      }),
+    ],
   },
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
