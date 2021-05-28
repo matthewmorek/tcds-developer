@@ -1,19 +1,23 @@
 <template>
-  <div class="swagger" id="swagger"></div>
+  <ClientOnly>
+    <div class="swagger" id="swagger"></div>
+  </ClientOnly>
 </template>
 
 <script>
-import SwaggerUI from "swagger-ui";
 import "swagger-ui/dist/swagger-ui.css";
+// import SwaggerUI from "!swagger-ui";
 
 export default {
   name: "Swagger",
   props: ["specPath"],
   mounted() {
     // const spec = require(this.specPath);
+    window.SwaggerUI = require("swagger-ui");
+
     SwaggerUI({
       url: this.specPath,
-      dom_id: "#swagger",
+      dom_id: "swagger",
     });
   },
 };
