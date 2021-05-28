@@ -1,0 +1,129 @@
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__light-e5bd8a84112a4d6903697bf75f56fcf3.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__light-c7cdd68a77c425b59a399269f8d855aa.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__light--italic-964279857c987bb604ce8fe70a4c9634.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__light--italic-e5af2f95ca84e631aca5cc3b15da6188.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__book-8a291f1b7cfa26879c5ff8cc2e49f8e9.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__book-9b54e8b3907e91cbb2c35ec028bfdef1.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__book--italic-d729809bc0d787f3251869784bd64355.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__book--italic-b7f1bd1c05b0001ae6276cdd9eeb00dc.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__regular-e8421fd63ef6a6907b2e36461ef720c9.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__regular-437b5fc3829e6608835520b2c59eac16.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__regular--italic-dd6117004a3e4d4068f2070bc5260bdb.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__regular--italic-73e138c40cb3345956bcc3b2c6b1cb05.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__semibold-95ce67d366743c0e8981b56f14453db9.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__semibold-99d4ad62e54771c66cbd716258059add.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__semibold--italic-147f8f5310b5af43f71f46e0f954095d.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__semibold--italic-0ce34c90b9ebeb66662644a9f06fe1e6.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__bold-42b5aa20ed80bde2fe46fe96fb7a4832.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__bold-aec2753d8e2a133ed18b41619108dcb4.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__bold--italic-7239575d1fb3356421f4d77047ab482b.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__bold--italic-bed80552b93e4298ae371f63e906998b.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__black-f01a04bdd00e9b9bfd81b3f32d11d285.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__black-b3758c9113509fc3655b7d0e0013239f.woff)
+      format("woff");
+}
+
+@font-face {
+  font-family: "ToyotaType";
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+  src: url(https://fonts.toyotaconnected.io/fonts/toyota-type__black--italic-bb4d7bbb6fd07a7f773c04dba157a302.woff2)
+      format("woff2"),
+    url(https://fonts.toyotaconnected.io/fonts/toyota-type__black--italic-57bd70ba8a7e4ff001998616352a1667.woff)
+      format("woff");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

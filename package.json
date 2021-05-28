@@ -1,0 +1,27 @@
+{
+  "name": "tcds-dev-docs",
+  "private": true,
+  "scripts": {
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build": "gridsome build"
+  },
+  "dependencies": {
+    "@gridsome/plugin-sitemap": "^0.4.0",
+    "@gridsome/remark-prismjs": "^0.5.0",
+    "@gridsome/source-filesystem": "^0.6.2",
+    "@tailwindcss/typography": "^0.4.1",
+    "autoprefixer": "^9",
+    "gridsome": "^0.7.0",
+    "gridsome-plugin-robots": "^0.2.1",
+    "postcss": "^7.0.35",
+    "swagger-ui": "^3.49.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vue-svg-loader": "^0.16.0"
+  },
+  "devDependencies": {
+    "@gridsome/transformer-json": "^0.2.1",
+    "@gridsome/transformer-remark": "^0.6.4",
+    "@gridsome/transformer-yaml": "^0.2.1"
+  }
+}

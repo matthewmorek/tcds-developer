@@ -1,0 +1,1189 @@
+openapi: 3.0.1
+info:
+  title: Event Notifications
+  description: Set custom limits and receive alerts if and when they are exceeded.
+  contact:
+    name: TC Mobility Team
+    email: tcds-support@toyotaconnected.com
+  license:
+    name: Toyota Connected
+    url: https://www.toyotaconnected.com
+  version: "1.0"
+servers:
+- url: //api.tcmobility.net/
+tags:
+- name: Notifications
+  description: REST API for Notifications
+- name: Data
+  description: REST API for Vehicle Data Management
+- name: VIN Associations
+  description: REST API for Vin to Rule Associations
+- name: Rules
+  description: REST API for Rules
+- name: Geofences
+  description: REST API for Geofences
+paths:
+  /v1/create-geofence:
+    post:
+      tags:
+      - Geofences
+      summary: Create a new geofence
+      operationId: createGeofenceUsingPOST
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: createRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeofenceServiceCreateRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeofenceServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: createRequest
+  /v1/create-rule:
+    post:
+      tags:
+      - Rules
+      summary: Create a new rule
+      operationId: createRuleUsingPOST
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: createRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleServiceCreateRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: createRequest
+  /v1/delete-geofence:
+    delete:
+      tags:
+      - Geofences
+      summary: Delete an existing geofence
+      operationId: deleteGeofenceUsingDELETE
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeofenceDeletionRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeofenceServiceResponse'
+        204:
+          description: No Content
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/delete-vehicles:
+    delete:
+      tags:
+      - Data
+      summary: Delete all data related to a vin
+      operationId: deleteVehiclesUsingDELETE
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataServiceRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataServiceResponse'
+        204:
+          description: No Content
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/disable-rule:
+    put:
+      tags:
+      - Rules
+      summary: Disable a rule
+      operationId: disableRuleUsingPUT
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleEnablementRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleEnablementResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/edit-geofence:
+    put:
+      tags:
+      - Geofences
+      summary: Edit an existing geofence
+      operationId: editGeofenceUsingPUT
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: editRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeofenceServiceEditRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeofenceServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: editRequest
+  /v1/edit-rule:
+    put:
+      tags:
+      - Rules
+      summary: Edit an existing rule
+      operationId: editRuleUsingPUT
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: editRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleServiceEditRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: editRequest
+  /v1/enable-rule:
+    put:
+      tags:
+      - Rules
+      summary: Enable a rule
+      operationId: enableRuleUsingPUT
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleEnablementRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleEnablementResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/geofences:
+    get:
+      tags:
+      - Geofences
+      summary: Get summaries for all geofences
+      operationId: getAllGeofencesUsingGET
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeofenceSummaryResponse'
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v1/rule-subscriptions:
+    post:
+      tags:
+      - VIN Associations
+      summary: Associate rules to VINs
+      operationId: associateVinsToRulesUsingPOST
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VinStateServiceRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinStateServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/rule-unsubscriptions:
+    delete:
+      tags:
+      - VIN Associations
+      summary: Disassociate VINs to rules
+      operationId: unassociateVinsToRulesUsingDELETE
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VinStateServiceRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinStateServiceResponse'
+        204:
+          description: No Content
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/rules:
+    get:
+      tags:
+      - Rules
+      summary: Get all rules
+      operationId: getRulesUsingGET
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleServiceResponse'
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v1/rules/{ruleId}:
+    get:
+      tags:
+      - Rules
+      summary: Get a specific rule
+      operationId: getRuleUsingGET
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        description: ruleId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleServiceResponse'
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v1/subscribe-to-notifications:
+    post:
+      tags:
+      - Notifications
+      summary: Subscribe to receive notifications
+      operationId: subscribeToNotificationsUsingPOST
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionServiceRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/unsubscribe-to-notifications:
+    delete:
+      tags:
+      - Notifications
+      summary: Unsubscribe from receiving notifications
+      operationId: unsubscribeToNotificationsUsingDELETE
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionServiceRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionServiceResponse'
+        204:
+          description: No Content
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+      x-codegen-request-body-name: request
+  /v1/validate-rule:
+    post:
+      tags:
+      - Rules
+      summary: Validate a rule
+      operationId: validateRuleUsingPOST
+      parameters:
+      - name: x-id-token
+        in: header
+        description: x-id-token
+        required: true
+        schema:
+          type: string
+      - name: X-Amzn-Trace-Id
+        in: header
+        description: X-Amzn-Trace-Id
+        schema:
+          type: string
+      requestBody:
+        description: editRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleServiceEditRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleServiceResponse'
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: editRequest
+components:
+  schemas:
+    ChildRuleServiceCreateRequest:
+      type: object
+      properties:
+        childIds:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        function:
+          type: string
+          enum:
+          - BASIC_COMPARISON
+          - GEOFENCE
+        operator:
+          type: string
+        parentIds:
+          type: array
+          items:
+            type: string
+        ruleId:
+          type: string
+        rules:
+          type: array
+          description: rules attribute will be empty for child attributes
+          items:
+            $ref: '#/components/schemas/ChildRuleServiceCreateRequest'
+        value:
+          type: string
+    DataServiceRequest:
+      type: object
+      properties:
+        action:
+          type: string
+        vinList:
+          type: array
+          items:
+            type: string
+    DataServiceResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        invalidVins:
+          type: array
+          items:
+            type: string
+        processedVins:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+        unauthorizedVins:
+          type: array
+          items:
+            type: string
+    GeofenceDeletionRequest:
+      type: object
+      properties:
+        geofenceIds:
+          type: array
+          items:
+            type: string
+    GeofenceDeletionResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        invalidGeofenceIds:
+          type: array
+          items:
+            type: string
+        ruleDependencyFailures:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleGeofenceXref'
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+        unprocessedGeofenceIds:
+          type: array
+          items:
+            type: string
+    GeofenceServiceCreateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        wkt:
+          type: string
+    GeofenceServiceEditRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        geofenceId:
+          type: string
+        name:
+          type: string
+        wkt:
+          type: string
+    GeofenceServiceResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        geofenceId:
+          type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+    GeofenceSummary:
+      type: object
+      properties:
+        description:
+          type: string
+        geofenceId:
+          type: string
+        name:
+          type: string
+    GeofenceSummaryResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        geofences:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeofenceSummary'
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+    Operator:
+      type: object
+    Rule:
+      type: object
+      properties:
+        description:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        function:
+          type: string
+          enum:
+          - BASIC_COMPARISON
+          - GEOFENCE
+        interval:
+          type: integer
+          format: int64
+        isActive:
+          type: boolean
+        isIndependent:
+          type: boolean
+        operator:
+          $ref: '#/components/schemas/Operator'
+        parentIds:
+          type: array
+          items:
+            type: string
+        policy:
+          type: string
+          enum:
+          - FIRST
+          - LAST
+          - MAX
+          - MIN
+        productSubscriptionId:
+          type: string
+        ruleId:
+          type: string
+        rules:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Rule'
+        subscriberId:
+          type: string
+        value:
+          type: string
+        weight:
+          type: integer
+          format: int32
+    RuleEnablementRequest:
+      type: object
+      properties:
+        ruleIds:
+          type: array
+          items:
+            type: string
+    RuleEnablementResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        invalidRules:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+        unprocessedItems:
+          type: array
+          items:
+            type: string
+    RuleGeofenceXref:
+      type: object
+      properties:
+        geofenceId:
+          type: string
+        ruleId:
+          type: string
+    RuleServiceCreateRequest:
+      type: object
+      properties:
+        childIds:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        function:
+          type: string
+          enum:
+          - BASIC_COMPARISON
+          - GEOFENCE
+        operator:
+          type: string
+        parentIds:
+          type: array
+          items:
+            type: string
+        rules:
+          type: array
+          description: rules attribute will be empty for child attributes
+          items:
+            $ref: '#/components/schemas/ChildRuleServiceCreateRequest'
+        value:
+          type: string
+    RuleServiceEditRequest:
+      type: object
+      properties:
+        cascadeUpdates:
+          type: boolean
+        childIds:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        function:
+          type: string
+          enum:
+          - BASIC_COMPARISON
+          - GEOFENCE
+        operator:
+          type: string
+        parentIds:
+          type: array
+          items:
+            type: string
+        ruleId:
+          type: string
+          description: ruleId is not required for create rule
+        rules:
+          type: array
+          description: rules attribute will be empty for child attributes
+          items:
+            $ref: '#/components/schemas/RuleServiceEditRequest'
+        value:
+          type: string
+    RuleServiceResponse:
+      type: object
+      properties:
+        description:
+          type: string
+        errorMessage:
+          type: string
+        ruleId:
+          type: string
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+    RuleVinXref:
+      type: object
+      properties:
+        ruleId:
+          type: string
+        vins:
+          type: array
+          items:
+            type: string
+    SubscriptionServiceRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        endpoints:
+          type: array
+          items:
+            type: string
+        ruleIds:
+          type: array
+          items:
+            type: string
+    SubscriptionServiceResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        invalidEmails:
+          type: array
+          items:
+            type: string
+        invalidEndpoints:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+    VehicleDataPoint:
+      type: object
+      properties:
+        label:
+          type: string
+        time:
+          type: integer
+          format: int64
+        unit:
+          type: string
+        value:
+          type: string
+        vin:
+          type: string
+    VinState:
+      type: object
+      properties:
+        correlationId:
+          type: string
+        isActive:
+          type: boolean
+        messageId:
+          type: string
+        productSubscriptionId:
+          type: string
+        ruleEvaluation:
+          type: boolean
+        ruleId:
+          type: string
+        time:
+          type: integer
+          format: int64
+        vehicleData:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/VehicleDataPoint'
+        vin:
+          type: string
+    VinStateServiceRequest:
+      type: object
+      properties:
+        ruleVinXrefs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleVinXref'
+    VinStateServiceResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        invalidRules:
+          type: array
+          items:
+            type: string
+        invalidVins:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILURE
+        unprocessedItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/VinState'

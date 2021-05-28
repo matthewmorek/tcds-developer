@@ -1,0 +1,647 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Details
+  description: Get build information about a specific vehicle using VIN
+  version: 1.0.6
+servers:
+  - url: https://virtserver.swaggerhub.com/tmna-ddoa/ddoa-vehicle-details/1.0.6
+    description: SwaggerHub API Auto Mocking
+  - url: https://{host}/inventory
+    variables:
+      host:
+        enum:
+          - api.toyotadatasolutions.com
+        default: api.toyotadatasolutions.com
+tags:
+  - name: vehicles
+paths:
+  "/v1/vehicles/{vin}/builddata":
+    get:
+      tags:
+        - vehicles
+      summary: Gets Vehicle Build Data
+      description: Gets Vehicle Build Data
+      operationId: getVehicleBuildData
+      parameters:
+        - name: vin
+          in: path
+          description: Vehicle Identification Number
+          required: true
+          style: simple
+          explode: false
+          schema:
+            maxLength: 17
+            minLength: 17
+            pattern: "[0-9A-HJ-NPR-Z]"
+            type: string
+            description: Vehicle Identification Number
+            example: 5TFHY5F13KX799310
+          example: 5TFHY5F13KX799310
+        - name: x-transaction-id
+          in: header
+          description: Transaction ID Header Parameter (UUID version 4)
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 16a7d408-aed4-43f8-8af4-7a17f407f799
+        - name: x-subscriber-code
+          in: header
+          description: Requesting subscriber code
+          required: false
+          schema:
+            maxLength: 5
+            minLength: 5
+            pattern: ^[0-9]+$
+            type: string
+          example: "04536"
+      responses:
+        "200":
+          description: Vehicle Details Successful Response
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vehicle"
+        "400":
+          description: |
+            Bad Request, server cannot or will not process the request.
+            See more details in the Error message
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+        "401":
+          description: >
+            The request requires user authentication. The response MUST include
+            a WWW-Authenticate header field containing a challenge applicable to
+            the requested resource.
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+        "403":
+          description: >
+            The request requires user authentication. The response MUST include
+            a WWW-Authenticate header field containing a challenge applicable to
+            the requested resource.
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+        "404":
+          description: |
+            The requested resource was not found.
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+        "429":
+          description: >
+            Too Many Requests error occurs when a user tries to perform too many
+            requests within a certain timeframe.
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+        "500":
+          description: >
+            The server encountered an unexpected condition which prevented it
+            from fulfilling the request.
+          headers:
+            x-transaction-id:
+              $ref: "#/components/headers/x-transaction-id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+      security:
+        - AWSAPIGatewayAuthorizer: []
+      x-toyota-rate-limit:
+        rate: 10
+        burst: 10
+components:
+  schemas:
+    Vehicle:
+      type: object
+      properties:
+        vin:
+          maxLength: 17
+          minLength: 17
+          pattern: ^[0-9A-HJ-NPR-Z]+$
+          type: string
+          description: Vehicle Identification Number
+          example: 5TFHY5F13KX799310
+        brand:
+          type: string
+          description: Vehicle Make
+          example: toyota
+          enum:
+            - toyota
+            - lexus
+            - scion
+        marketingSeries:
+          type: string
+          description: Vehicle Marketing Series
+          example: Tundra
+        seriesCode:
+          type: string
+          description: Vehicle Series Code
+          example: tundra
+        year:
+          type: integer
+          description: Model Year
+          example: 2019
+        category:
+          type: string
+          description: Vehicle Supply Chain Category
+          example: G
+          enum:
+            - A
+            - C
+            - D
+            - E
+            - F
+            - G
+            - H
+            - J
+            - K
+            - L
+            - M
+            - N
+            - P
+            - Q
+            - R
+            - T
+            - U
+            - W
+            - X
+            - Z
+        dealerCategory:
+          type: string
+          description: Dealer Category
+          example: G
+          enum:
+            - A
+            - F
+            - G
+            - H
+            - L
+            - Y
+        bodyStyleDesc:
+          type: string
+          description: Body Style Description
+          example: LIMITED CREWMAX
+        seating:
+          type: integer
+          description: Available Seating in Vehicle
+          example: 5
+        model:
+          $ref: "#/components/schemas/Model"
+        engine:
+          $ref: "#/components/schemas/Engine"
+        transmission:
+          $ref: "#/components/schemas/Transmission"
+        options:
+          type: array
+          items:
+            $ref: "#/components/schemas/Option"
+        exteriorColor:
+          $ref: "#/components/schemas/Color"
+        interiorColor:
+          description: Interior Color
+          example:
+            code: LA13
+            marketingName: Graphite Leather
+            oemName: GRAPHITE
+          allOf:
+            - $ref: "#/components/schemas/Color"
+        price:
+          $ref: "#/components/schemas/Price"
+        flags:
+          $ref: "#/components/schemas/Flags"
+        fuelEconomyMpg:
+          $ref: "#/components/schemas/FuelEconomy"
+        fuelEconomyMpge:
+          $ref: "#/components/schemas/FuelEconomy"
+        fuelType:
+          $ref: "#/components/schemas/FuelType"
+        production:
+          $ref: "#/components/schemas/Production"
+        standardOptions:
+          $ref: "#/components/schemas/StandardOptions"
+        safetyRatings:
+          $ref: "#/components/schemas/SafetyRatings"
+        checkCode:
+          type: string
+          description: USA Check Code
+          example: "2"
+        labeledWeight:
+          type: number
+          description: Labeled Weight mapped from NVS OptionListLabelWeight
+          example: 53.64
+        weightRating:
+          type: string
+          description: Gross Vehicle Weight Rating Unit
+          example: 7200 lbs
+        serialNumber:
+          type: string
+          description: Vehicle Serial Number
+          example: KX799310
+        vehicleOrderNumber:
+          type: string
+          description: Vehicle Order Number
+          example: "6319655"
+        updatedAt:
+          type: string
+          description: Date when the vehicle record was last updated
+          format: date-time
+          example: 2019-06-14T21:26:22.546Z
+        warnings:
+          type: array
+          description: List of warnings
+          items:
+            $ref: "#/components/schemas/ServiceWarning"
+    Model:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Model Code
+          example: "8372"
+        marketingName:
+          type: string
+          description: Model Marketing Description
+          example: Tundra Limited
+        phaseCode:
+          type: string
+          description: Model Price Phase Code
+          example: A
+      description: Model Details
+    Engine:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Engine Code
+          example: 57lv8
+        name:
+          type: string
+          description: Engine Name
+          example: 5.7L V8 Engine
+        size:
+          type: integer
+          description: Engine size (hp or kw)
+          format: int32
+          example: 381
+        sizeUnit:
+          type: string
+          description: Engine size unit (hp or kw)
+          example: hp
+          enum:
+            - hp
+            - kw
+        cylinders:
+          type: integer
+          description: Number of engine cylinders
+          example: 8
+        fuelType:
+          type: string
+          description: Type of fuel consumed by engine
+          example: G
+      description: Engine Details
+      allOf:
+        - $ref: "#/components/schemas/BaseEngine"
+    BaseEngine:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Engine Code
+          example: 57lv8
+        name:
+          type: string
+          description: Engine Name
+          example: 5.7L V8 Engine
+      description: Engine Details
+    Transmission:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Transmission code
+          example: 6-Speed automatic transmission
+        description:
+          type: string
+          description: Transmission description
+          example: 6-speed Electronically Controlled automatic Transmission
+      description: Transmission Details
+    Option:
+      type: object
+      properties:
+        msrp:
+          type: number
+          description: Option Retail Price (applicable for FIO/PIO only)
+          example: 70
+        dealerInvoicePrice:
+          type: number
+          description: Dealer Invoice Price
+          example: 129
+      description: Option Details
+      allOf:
+        - $ref: "#/components/schemas/BaseOption"
+    BaseOption:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Option Code
+          example: OF
+        marketingName:
+          type: string
+          description: Option Marketing Description
+          example: TRD Off-Road Package
+        marketingLongName:
+          type: string
+          description: Option Marketing Long Name (descriptive text)
+          example: "TRD Off-Road Package: Upgrades standard wheels to 18-in. split 5-spoke
+            TRD Off-Road Package alloy wheels and P275/65R18 tires. Includes
+            trail-tuned Bilstein<sup>®</sup> shock absorbers, engine skid plate,
+            fuel tank skid plate, front tow hooks [tow] (on 4x2 models; standard
+            on all 4x4 models), LED headlights and LED fog lights (on SR5 models
+            only), TRD Off-Road floor mats [floor_mat] (on SR5 and Limited
+            models only), and bedside TRD Off-Road decal"
+        type:
+          type: string
+          description: |
+            Option Type
+              F --> FIO,
+              P --> PPO,
+              D --> DIO,
+              L
+          example: L
+        packageInd:
+          type: boolean
+          description: Package Indicator (true for package, false for accessories)
+          example: true
+      description: Base Option Details
+    Color:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Color Code
+          example: 03R3
+        marketingName:
+          type: string
+          description: Color Marketing Description
+          example: Barcelona Red Metallic
+        oemName:
+          type: string
+          description: Color OEM Name
+          example: BARCELONA RED MET.
+      description: Color Details
+    Price:
+      type: object
+      properties:
+        baseMsrp:
+          type: number
+          description: Manufacturer's Suggested Retail Price
+          example: 45600
+        totalMsrp:
+          type: number
+          description: Total Manufacturer's Suggested Retail Price
+          example: 47982
+        optTotalMsrp:
+          type: number
+          description: Total Option MSRP
+          example: 987
+        dph:
+          type: number
+          description: Retail Price of Destination, Processing and Handling Charge for the
+            vehicle. Also known as Freight Charge
+          example: 1395
+        dealerInvoice:
+          type: number
+          description: Dealer Invoice Price
+          example: 987
+        totalDealerInvoice:
+          type: number
+          description: Total Dealer Invoice Price
+          example: 1234
+        optDealerInvoice:
+          type: number
+          description: OPT Dealer Invoice Price
+          example: 1102
+        tda:
+          type: number
+          description: TDA Price
+          example: 987
+        fuelPrice:
+          type: number
+          description: Fuel Price
+          example: 50
+        totalHoldback:
+          type: number
+          description: Total Holdback Price
+          example: 600
+        ppoHoldback:
+          type: number
+          description: PPO Holdback Price
+          example: 750
+        wfr:
+          type: number
+          description: WFR Price
+          example: 987
+      description: Vehicle Pricing Details
+    Flags:
+      type: object
+      properties:
+        damaged:
+          type: boolean
+          description: Damaged Indicator
+          example: false
+        ssc:
+          type: boolean
+          description: Service Safety Campaign Indicator
+          example: false
+      description: Various Vehicle Flags
+    FuelEconomy:
+      type: object
+      properties:
+        city:
+          type: integer
+          description: City MPG
+          example: 13
+        highway:
+          type: integer
+          description: Highway MPG
+          example: 17
+        combined:
+          type: integer
+          description: Combined MPG
+          example: 14
+      description: >
+        Fuel Economy data for gasoline/hybrid vehicles or Fuel Economy
+        Equivalent for electric vehicles
+    FuelType:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Fuel Type Code
+          example: "1"
+        name:
+          type: string
+          description: Fuel Type Name
+          example: Gasoline
+      description: Fuel Type
+    Production:
+      type: object
+      properties:
+        plant:
+          type: string
+          description: Plant Code
+          example: S
+        plantDescription:
+          type: string
+          description: Plant Description
+          example: SAN ANTONIO
+        buildDate:
+          type: string
+          description: Date when vehicle was built
+          format: date-time
+          example: 2018-10-25T00:00:00Z
+        finalAssemblyPoint:
+          type: string
+          description: Final Assembly point of the vehicle
+          example: SAN ANTONIO, TEXAS, U.S.A.
+      description: Vehicle Production information
+    StandardOptions:
+      type: object
+      properties:
+        safetyAndConvenience:
+          type: array
+          example:
+            - Child-protector rear door locks
+            - Tire Pressure Monitor System (TPMS)
+          items:
+            type: string
+        mechanicalAndPerformance:
+          type: array
+          example:
+            - "Steering: Hydraulic power rack-and-pinion"
+            - "Emission rating: Low Emission Vehicle II (LEV-II)"
+          items:
+            type: string
+        interior:
+          type: array
+          example:
+            - 5-passenger seating capacity
+            - 60/40 split fold-up rear seats
+          items:
+            type: string
+        exterior:
+          type: array
+          example:
+            - Chrome heated power outside mirrors
+            - Windshield wiper de-icer
+          items:
+            type: string
+      description: Standard Options
+    SafetyRatings:
+      type: object
+      properties:
+        driver:
+          type: string
+          description: Frontal Crash Rating - Driver
+          example: 4 STARS
+        passenger:
+          type: string
+          description: Frontal Crash Rating - Passenger
+          example: 4 STARS
+        front:
+          type: string
+          description: Side Crash Rating - Front
+          example: 5 STARS
+        rear:
+          type: string
+          description: Side Crash Rating - Rear
+          example: 5 STARS
+        rollover:
+          type: string
+          description: Rollover Crash Rating
+          example: 4 STARS
+        overall:
+          type: string
+          description: Overall Crash Rating
+          example: 4 STARS
+      description: Vehicle Safety Rating
+    ServiceWarning:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Service warning code
+          example: "1001"
+        message:
+          type: string
+          description: Service warning message
+          example: Access to this API is temporarily unavailable.
+        title:
+          type: string
+          example: name
+    ErrorModel:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error Message, summary of issues.
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/FieldMessage"
+    FieldMessage:
+      required:
+        - field
+        - message
+      type: object
+      properties:
+        field:
+          type: string
+          description: Specific Field where error were found.
+        message:
+          type: string
+          description: Error Message specific to a field.
+  headers:
+    x-transaction-id:
+      description: Transaction ID Header (UUID version 4)
+      required: true
+      schema:
+        type: string
+        format: uuid
+      example: 16a7d408-aed4-43f8-8af4-7a17f407f799
+  securitySchemes:
+    AWSAPIGatewayAuthorizer:
+      type: apiKey
+      name: Authorization
+      in: header

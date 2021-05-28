@@ -1,0 +1,204 @@
+swagger: "2.0"
+info:
+  description: Track the status of your vehicles in near-real time.
+  version: 1.0.0
+  title: Telemetry
+host: api-dev.toyotadatasolutions.com
+basePath: /telemetry-api
+schemes:
+  - https
+tags:
+  - name: AllTelemetryController
+    description: >-
+      The All Telemetry service, retrieves telemetry for all authorized VINs
+      running in last minute.
+  - name: TelemetryByVinController
+    description: >-
+      The All Telemetry By VIN, retrieves last known telemetry for requested
+      VINs.
+definitions:
+  json_TelemetryDto:
+    type: object
+    title: TelemetryDto
+    properties:
+      correlationId:
+        description: Unique ID used to track the processing of a particular record
+        type: string
+      lastTimestamp:
+        description: Most recent timestamp for latest data received
+        type: string
+      location:
+        $ref: "#/definitions/json_VehicleLocation"
+        description: Recent location of the vehicle
+      vehicleName:
+        description: Vehicle name
+        type: string
+      vin:
+        description: "Vehicle VIN, 17 character string"
+        type: string
+      telemetry:
+        description: >-
+          List of data labels and values received as of lastTimestamp
+
+          Key could be any of the following supported data labels
+
+          ["estimatedFuelLevel","fuelLevel","odometer","speed","flTirePressure","frTirePressure","rlTirePressure","rrTirePressure","driverWindow","passengerWindow","rlWindow","rrWindow","sunRoof"]
+
+          Labels are subject to the availability in the last message received
+        type: object
+        additionalProperties:
+          $ref: "#/definitions/json_TelemetryValue"
+    example:
+      correlationId: ...
+      lastTimestamp: ...
+      location:
+        type: ...
+        coordinates:
+          - 12345
+          - 12345
+      vehicleName: ...
+      vin: ...
+      telemetry:
+        property1:
+          value: 12345
+          unit: ...
+        property2:
+          value: 12345
+          unit: ...
+    description: "Telemetry Response, last know attributes of vehicle"
+  json_TelemetryValue:
+    type: object
+    title: TelemetryValue
+    properties:
+      value:
+        description: ""
+        type: number
+      unit:
+        description: ""
+        type: string
+    example:
+      value: 12345
+      unit: ...
+    description: "TelemetryValue, will be the most recent value and unit if applicable."
+  json_VehicleLocation:
+    type: object
+    title: VehicleLocation
+    properties:
+      type:
+        description: Geometry type. Defaults to Point.
+        type: string
+      coordinates:
+        description: Coordinates are subject to the availability in the message received
+        type: array
+        items:
+          type: number
+    example:
+      type: ...
+      coordinates:
+        - 12345
+        - 12345
+    description: Recent location of the vehicle
+  json_VinList:
+    type: object
+    title: VinList
+    properties:
+      vins:
+        description: |-
+          List of VIN's
+          ["VIN1", "VIN2", ...]
+        type: array
+        items:
+          type: string
+    example:
+      vins:
+        - ...
+        - ...
+    description: ""
+paths:
+  /demo/telemetry/v1/data:
+    get:
+      tags:
+        - TelemetryByVinController
+      description: Retrieve Telemetry data for a single VIN.
+      operationId: getTelemetryByVin
+      produces:
+        - application/json
+      parameters:
+        - name: vin
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: ""
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/json_TelemetryDto"
+          examples:
+            correlationId: ...
+            lastTimestamp: ...
+            location:
+              type: ...
+              coordinates:
+                - 12345
+                - 12345
+            vehicleName: ...
+            vin: ...
+            telemetry:
+              property1:
+                value: 12345
+                unit: ...
+              property2:
+                value: 12345
+                unit: ...
+          description: ""
+    post:
+      tags:
+        - TelemetryByVinController
+      description: Retrieve Telemetry data for up to 100 authorized VINs.
+      operationId: getTelemetryByVinList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: x-id-token
+          in: header
+          required: true
+          type: string
+          description: ""
+        - name: body
+          required: false
+          in: body
+          schema:
+            $ref: "#/definitions/json_VinList"
+          description: ""
+      responses:
+        "201":
+          schema:
+            description: ""
+            type: array
+            items:
+              $ref: "#/definitions/json_TelemetryDto"
+          examples:
+            correlationId: ...
+            lastTimestamp: ...
+            location:
+              type: ...
+              coordinates:
+                - 12345
+                - 12345
+            vehicleName: ...
+            vin: ...
+            telemetry:
+              property1:
+                value: 12345
+                unit: ...
+              property2:
+                value: 12345
+                unit: ...
+          description: ""
