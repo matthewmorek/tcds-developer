@@ -18,7 +18,7 @@ const webpack = require("webpack");
 const tailwind = require("tailwindcss");
 
 module.exports = {
-  siteName: "Developers",
+  siteName: "Toyota Connected Developers",
   siteDescription: "Documentation for Toyota Connected Data Solutions",
   siteUrl: siteUrl,
   metadata: {},

@@ -21,6 +21,16 @@
   }
 </page-query>
 
+<script>
+export default {
+  metaInfo() {
+    return {
+      title: this.$page.page.title,
+    };
+  },
+};
+</script>
+
 <style lang="postcss">
 code[class*="language-"],
 pre[class*="language-"] {

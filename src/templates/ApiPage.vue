@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div>
-      <api-header :api-meta="$page.root" :pages="$page.pages.edges" />
+      <api-header :api-meta="$page.apiRoot" :pages="$page.pages.edges" />
       <div v-html="$page.page.content" class="prose"></div>
     </div>
   </Layout>
@@ -16,7 +16,7 @@
       content
     }
     
-    root: apiRoot (id: $api) {
+    apiRoot: apiRoot (id: $api) {
       id
       path
       title
@@ -42,6 +42,11 @@ import ApiHeader from "@/components/ApiHeader";
 export default {
   components: {
     ApiHeader,
+  },
+  metaInfo() {
+    return {
+      title: `${this.$page.apiRoot.title} / ${this.$page.page.title}`,
+    };
   },
 };
 </script>

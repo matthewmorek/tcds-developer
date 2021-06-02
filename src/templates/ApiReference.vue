@@ -38,5 +38,10 @@ export default {
     ApiHeader,
     Swagger,
   },
+  metaInfo() {
+    return {
+      title: `${this.$page.root.title} / Reference`,
+    };
+  },
 };
 </script>

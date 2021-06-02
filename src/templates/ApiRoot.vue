@@ -37,6 +37,11 @@ export default {
   components: {
     ApiHeader,
   },
+  metaInfo() {
+    return {
+      title: `${this.$page.api.title} / Overview`,
+    };
+  },
 };
 </script>
 

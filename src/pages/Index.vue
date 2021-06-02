@@ -252,7 +252,7 @@ export default {
     CounterCard,
   },
   metaInfo: {
-    title: "Toyota Connected Data Solutions",
+    title: "Data Solutions",
   },
 };
 </script>
