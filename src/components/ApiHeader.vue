@@ -74,6 +74,7 @@
               hover:text-gray-900
               hover:bg-gray-50
             "
+            v-if="apiMeta.reference"
             :to="`${apiMeta.path}/reference`"
             active-class="text-gray-900 bg-gray-50"
             exact-path

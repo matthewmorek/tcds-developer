@@ -2,7 +2,7 @@
   <Layout>
     <div>
       <api-header :api-meta="$page.api" :pages="$page.pages.edges" />
-      <div v-html="$page.api.content" class="my-8 prose"></div>
+      <div v-html="$page.api.content" class="my-8 prose max-w-3xl"></div>
     </div>
   </Layout>
 </template>
