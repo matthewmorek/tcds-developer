@@ -66,8 +66,8 @@ Gridsome will create a special reference page under `/api/{your-api}/reference`,
 
 To add more documentation for your API you should place it in a `docs` subdirectory within your API directory and add Markdown documents there, i.e: `/content/api/{your-api}/docs/getting-started.md`.
 
-<div class="info">
-Make sure to include `id: id-of-your-api` in each of your document’s Front Matter, otherwise Gridsome won't be able to link them together.
+<div class="notice">
+Make sure to include <code>id: id-of-your-api</code> in each of your document’s Front Matter, otherwise Gridsome won't be able to link them together.
 </div>
 
 ## General documentation

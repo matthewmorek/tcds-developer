@@ -127,3 +127,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notice,
+.warning,
+.info,
+.success {
+  @apply text-gray-900 p-4 rounded border-l-4 text-sm;
+}
+
+.notice {
+  @apply bg-yellow-100 border-yellow-500;
+}
+
+.warning {
+  @apply bg-red-100 border-red-500;
+}
+
+.info {
+  @apply bg-gray-100 border-gray-500;
+}
+
+.success {
+  @apply bg-green-100 border-green-500;
+}
+
+.notice p:first-child,
+.warning p:first-child,
+.info p:first-child,
+.success p:first-child {
+  @apply mt-0;
+}
+
+.notice p:last-child,
+.warning p:last-child,
+.info p:last-child,
+.success p:last-child {
+  @apply mb-0;
+}
