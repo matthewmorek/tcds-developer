@@ -1,8 +1,8 @@
 <template>
   <Layout>
-    <div>
-      <api-header :api-meta="$page.root" :pages="$page.pages.edges" />
-      <swagger :spec-path="`/references/${$page.root.reference}`" />
+    <api-header :api-meta="$page.root" :pages="$page.pages.edges" />
+    <div class="px-6 mx-auto max-w-7xl">
+      <swagger :spec-path="`/references/${$page.root.reference}`"></swagger>
     </div>
   </Layout>
 </template>
@@ -31,10 +31,13 @@
 </page-query>
 
 <script>
+import Layout from "@/layouts/Landing";
 import ApiHeader from "@/components/ApiHeader";
 import Swagger from "@/components/Swagger";
+
 export default {
   components: {
+    Layout,
     ApiHeader,
     Swagger,
   },

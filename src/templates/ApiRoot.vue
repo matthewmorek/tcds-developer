@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <div>
-      <api-header :api-meta="$page.api" :pages="$page.pages.edges" />
+    <api-header :api-meta="$page.api" :pages="$page.pages.edges" />
+    <div class="px-6 mx-auto max-w-7xl">
       <div v-html="$page.api.content" class="my-8 prose max-w-3xl"></div>
     </div>
   </Layout>
@@ -32,9 +32,12 @@ query($id: ID!) {
 </page-query>
 
 <script>
+import Layout from "@/layouts/Landing";
 import ApiHeader from "@/components/ApiHeader";
+
 export default {
   components: {
+    Layout,
     ApiHeader,
   },
   metaInfo() {
