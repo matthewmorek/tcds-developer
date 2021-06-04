@@ -44,6 +44,13 @@ export default {
   metaInfo() {
     return {
       title: `${this.$page.root.title} / Reference`,
+      meta: [
+        {
+          key: "description",
+          name: "description",
+          content: this.$page.root.description,
+        },
+      ],
     };
   },
 };

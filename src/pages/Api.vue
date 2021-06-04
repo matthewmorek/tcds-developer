@@ -64,6 +64,14 @@ export default {
   },
   metaInfo: {
     title: "API Services",
+    meta: [
+      {
+        key: "description",
+        name: "description",
+        content:
+          "Discover APIs that enable access to data and services of Toyota Connected vehicles.",
+      },
+    ],
   },
 };
 </script>

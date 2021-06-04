@@ -48,5 +48,16 @@ export default {
     GetStarted,
     Callout,
   },
+  metaInfo: {
+    title: "How can we help?",
+    meta: [
+      {
+        key: "description",
+        name: "description",
+        content:
+          "Get support for business or technical enquiries related to Toyota Data Solutions.",
+      },
+    ],
+  },
 };
 </script>

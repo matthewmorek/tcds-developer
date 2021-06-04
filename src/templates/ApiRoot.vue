@@ -43,6 +43,13 @@ export default {
   metaInfo() {
     return {
       title: `${this.$page.api.title} / Overview`,
+      meta: [
+        {
+          key: "description",
+          name: "description",
+          content: this.$page.api.description,
+        },
+      ],
     };
   },
 };
