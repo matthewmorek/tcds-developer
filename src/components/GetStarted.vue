@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center my-8 md:my-16 lg:my-24">
+  <div class="text-center my-8 md:my-16 lg:my-24 xl:my-32">
     <h2 class="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl my-4">
       Ready to get connected?
     </h2>

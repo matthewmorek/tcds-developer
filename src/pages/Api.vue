@@ -8,12 +8,16 @@
         lg:text-5xl
         font-bold
         my-8
-        lg:my-16
+        lg:mt-16
         text-center
       "
     >
       API Services
     </h1>
+    <p class="my-8 lg:mb-16 text-center text-lg text-gray-600 prose mx-auto">
+      Our APIs enable access to data and services of Toyota Connected vehicles,
+      and were created to meet specific business demands of modern fleets.
+    </p>
     <div
       class="
         grid grid-cols-1

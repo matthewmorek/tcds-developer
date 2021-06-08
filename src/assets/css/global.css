@@ -132,7 +132,7 @@
 .warning,
 .info,
 .success {
-  @apply text-gray-900 p-4 rounded border-l-4 text-sm;
+  @apply text-gray-900 p-4 rounded border-l-4 text-base;
 }
 
 .notice {

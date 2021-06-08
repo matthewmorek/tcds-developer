@@ -2,6 +2,10 @@
   <Layout>
     <api-header :api-meta="$page.api" :pages="$page.pages.edges" />
     <div class="px-6 mx-auto max-w-7xl">
+      <div class="info my-8">
+        <strong>Note: </strong>Toyota Data Solutions APIs are made for Toyota
+        business partners owning fleet of vehicles.
+      </div>
       <div v-html="$page.api.content" class="my-8 prose max-w-3xl"></div>
     </div>
   </Layout>
