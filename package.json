@@ -14,7 +14,7 @@
     "autoprefixer": "^9",
     "gridsome": "^0.7.0",
     "gridsome-plugin-robots": "^0.2.1",
-    "postcss": "^7.0.36",
+    "postcss": "^8.2.13",
     "swagger-ui": "^3.49.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue-svg-loader": "^0.16.0"
